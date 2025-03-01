@@ -1,0 +1,210 @@
+{% extends "master.html" %}
+{% block title %}
+
+My Order
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2007/2007620.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+
+<div style="margin-top: 20px;" class="card">
+    <h3 class="container" style="color: rgba(69, 43, 3, 0.863); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Order Summary : </h3><br>
+    <div class="container m-10 ">
+
+
+       <table class="table table-striped" style="opacity: 90%;">
+
+       <tr>
+         <th>S.no</th>
+         <th> Item Name </th>
+         <th> ML </th>
+         <th> Price </th>
+         <th> Quantity </th>
+         <th>Total</th>
+       </tr>
+      
+       {% for a in coffee %}
+       
+       <tr>
+         <td >{{ forloop.counter }}</td>
+         <td >{{a.itemname}}</td>
+
+         <td >{{a.itemquantity}}</td>
+         <td>{{a.itemprice}}</td>
+         <td>{{a.itemqnt}}</td>
+         <td>{{a.total}} &nbsp;Rs </td>
+       </tr>
+     
+
+       {% endfor %}
+       
+         <tr>
+          <td style="text-align: end;" colspan="5">Total Price (Including 5% GST) :  </td>
+          <td >{{totalprice}} Rs  </td>
+         </tr>
+        
+
+     </table>
+<!-- <h3>Delivering To : </h3> -->
+<br>
+<div style="display: none;">
+
+{% for i in order %}
+{% if forloop.last %}
+<div class="col" >
+    <label for="fname" class="form-label">First Name : </label>
+    <input type="text" class="form-control"  aria-label="First name" value="{{i.fname}}" name="fname" id="fname" readonly>
+  </div>
+  <div class="col">
+    <label for="lname" class="form-label">Last Name : </label>
+
+    <input type="text" class="form-control"  aria-label="Last name" name="lname" value="{{i.lname}}" id="lname" readonly>
+  </div>
+  <div class="col-col-12">
+    <label for="email" class="form-label">Email : </label>
+    <input type="email" class="form-control"  value="{{i.email}}" name="email" id="email" readonly>
+  </div>
+
+  <div class="col-col-12">
+    <label for="phone" class="form-label">Phone No.</label>
+    <input type="text" class="form-control" value="{{i.phone}}"  name="phone" id="phone" readonly>
+  </div>
+
+  <div class="col-12">
+    <label for="address" class="form-label">Address : </label>
+    <input type="text" class="form-control" id="inputAddress" name="address" value="{{i.address}}" readonly>
+  </div>
+ 
+  <div class="col-md-12">
+    <label for="city" class="form-label">City : </label>
+    <input type="text" class="form-control" id="inputCity" name="city" value="{{i.city}}" readonly>
+  </div>
+  <div class="col-md-12">
+    <label for="state" class="form-label">State : </label>
+    <input type="text" class="form-control" id="inputCity" name="state" value="{{i.state}}" readonly>
+  </div>
+ 
+  <div class="col-md-12">
+    <label for="zipcode" class="form-label">Zip : </label>
+    <input type="text" class="form-control" id="inputZip" name="zipcode" value="{{i.zipcode}}" readonly>
+  </div>
+
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<div style="text-align: center;">
+<a class="btn btn-success" style="width: 15%;" id="rzp-button1">Pay</a>
+
+<a href="/cancel" style="width: 15%;" class="btn btn-danger">Cancel</a>
+</div>
+
+
+<!-- 
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  name=document.getElementById("fname").value+" "+document.getElementById("lname").value;
+  email=document.getElementById("email").value;
+  phone=document.getElementById("phone").value;
+var options = {
+    "key": "rzp_test_6LPRQFPLbqHgqV", // Enter the Key ID generated from the Dashboard
+    "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Coffee Stall", //your business name
+    "description": "Discover your favorites and bring the experience home",
+    "image": "https://marketplace.canva.com/EAFLU7Mm3FI/1/0/800w/canva-brown-and-beige-simple-minimalist-coffee-shop-circle-logo-k8UALghOpZU.jpg",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "http://127.0.0.1:8000/purchased/",
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": `${name}`, //your customer's name
+        "email":`${email}`,
+        "contact": `${phone}` //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script> -->
+
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+name=document.getElementById("fname").value+" "+document.getElementById("lname").value;
+email=document.getElementById("email").value;
+phone=document.getElementById("phone").value;
+
+
+
+var options = {
+    "key": "rzp_test_6LPRQFPLbqHgqV", // Enter the Key ID generated from the Dashboard
+    "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "COffee Stall", //your business name
+    "description": "Discover your favorites and bring the experience home",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        // window.location.href=`http://127.0.0.1:8000/purchased/${response.razorpay_payment_id}/${response.razorpay_order_id}/${response.razorpay_signature}/`
+        window.location.href=`http://127.0.0.1:8000/purchased/${response.razorpay_payment_id}/${response.razorpay_order_id}/`
+
+        /*alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)*/
+    },
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+        "name": `${name}`, //your customer's name
+        "email":`${email}`,
+        "contact": `${phone}`  //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+  window.location.href=`http://127.0.0.1:8000/payfail/`
+
+      /*  alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);*/
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+
+
+
+
+
+
+{% endblock %}

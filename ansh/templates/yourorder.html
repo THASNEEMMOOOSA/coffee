@@ -1,0 +1,114 @@
+{% extends "master.html" %}
+{% block title %}
+
+My Order
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2007/2007620.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+
+<div style="margin-top: 20px;" class="card">
+    <h3 class="container" style="color: rgba(69, 43, 3, 0.863); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Order Summary : </h3><br>
+    <div class="container m-10 ">
+
+
+       <table class="table table-striped" style="opacity: 90%;">
+
+       <tr>
+         <th>S.no</th>
+         <th> Item Name </th>
+         <th> ML </th>
+         <th> Price </th>
+         <th> Quantity </th>
+         <th>Total</th>
+       </tr>
+      
+       {% for a in coffee %}
+       
+       <tr>
+         <td >{{ forloop.counter }}</td>
+         <td >{{a.itemname}}</td>
+
+         <td >{{a.itemquantity}}</td>
+         <td>{{a.itemprice}}</td>
+         <td>{{a.itemqnt}}</td>
+         <td>{{a.total}} &nbsp;Rs </td>
+       </tr>
+     
+
+       {% endfor %}
+       <tr>
+         <td style="text-align: end;" colspan="5">Total Price :  </td>
+         <td >{{checkout.totalprice}} Rs  </td>
+        </tr>
+        
+
+     </table>
+
+<h5>Order ID : {{payment.id}}</h5><br>
+
+<h3>Delivering To : </h3>
+<br>
+    
+{% for i in order %}
+{% if forloop.last %}
+
+<div class="col">
+    <label for="fname" class="form-label">First Name : </label>
+    <input type="text" class="form-control"  aria-label="First name" value="{{i.fname}}" name="fname" id="fname" readonly>
+  </div>
+  <div class="col">
+    <label for="lname" class="form-label">Last Name : </label>
+
+    <input type="text" class="form-control"  aria-label="Last name" name="lname" value="{{i.lname}}" id="lname" readonly>
+  </div>
+  <div class="col-col-12">
+    <label for="email" class="form-label">Email : </label>
+    <input type="email" class="form-control"  value="{{i.email}}" name="email" id="email" readonly>
+  </div>
+
+  <div class="col-col-12">
+    <label for="phone" class="form-label">Phone No.</label>
+    <input type="text" class="form-control" value="{{i.phone}}"  name="phone" id="phone" readonly>
+  </div>
+
+  <div class="col-12">
+    <label for="address" class="form-label">Address : </label>
+    <input type="text" class="form-control" id="inputAddress" name="address" value="{{i.address}}" readonly>
+  </div>
+ 
+  <div class="col-md-12">
+    <label for="city" class="form-label">City : </label>
+    <input type="text" class="form-control" id="inputCity" name="city" value="{{i.city}}" readonly>
+  </div>
+  <div class="col-md-12">
+    <label for="state" class="form-label">State : </label>
+    <input type="text" class="form-control" id="inputCity" name="state" value="{{i.state}}" readonly>
+  </div>
+ 
+  <div class="col-md-12">
+    <label for="zipcode" class="form-label">Zip : </label>
+    <input type="text" class="form-control" id="inputZip" name="zipcode" value="{{i.zipcode}}" readonly>
+  </div>
+  <br>
+  <div style="text-align: center;">
+     <a href="/testr/{{i.userid}}/" class="btn btn-dark" style="width: 15%;">Receipt</a>
+  
+      <a href="/home/" class="btn btn-dark" style="width: 15%;">Home</a>
+      </div>
+  
+{% endif %}
+{% endfor %}
+
+
+
+
+{% endblock %}

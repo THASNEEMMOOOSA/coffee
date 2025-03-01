@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - {{ order_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            border: 2px solid #ccc; /* Border around the whole receipt */
+            padding: 40px;
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .header img {
+            height: 60px;
+        }
+        .header .shop-info {
+            text-align: right;
+        }
+        .shop-info h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .shop-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        .customer-info, .footer {
+            margin-top: 30px;
+        }
+        .customer-info h2, .footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f0f0f0;
+        }
+        .totals {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+        .totals div {
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        /* Flexbox container for customer info and QR code */
+        .customer-info-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .customer-details {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+        }
+        /* Button Style */
+        .print-btn {
+            margin-top: 30px;
+            display:inline-block;
+            margin-left:auto;
+            margin-right:auto;
+            padding: 10px 20px;
+            background-color:rgb(145, 145, 145);
+            color: black;
+            border: none;
+            border-radius:5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .print-btn:hover {
+            background-color:rgb(200, 200, 200);
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section with Logo -->
+        <div class="header">
+            {% load static %}
+            <img src="{% static 'img/tea.png' %}" style="width:20%;height:20%;" alt="Logo">
+            <div class="shop-info">
+                <h1>Coffee Shop</h1>
+                <p>123 Coffee Lane, Coffee Town, CT 12345</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Email: contact@coffeeshop.com</p>
+                <p>Website: www.coffeeshop.com</p>
+            </div>
+        </div>
+
+        <!-- Customer Info Section with QR Code -->
+        <div class="customer-info-container">
+            <div class="customer-details">
+                <h2>Invoice To:</h2>
+                <p><strong>{{ customer_name }}</strong></p>
+                <p>{{ customer_address }}</p>
+                <p>Email: {{ customer_email }}</p>
+                <p style="font-weight:bold;">Order ID: {{ order_id }}</p>
+            </div>
+            <div class="qr-code">
+                <img src="{{ qr_code_url }}" alt="QR Code" width="100%" height="100%" />
+            </div>
+        </div>
+
+        <!-- Itemized Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price }}</td>
+                    <td>₹{{ item.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Totals Section -->
+        <div class="totals">
+            <div>Subtotal: ₹{{ subtotal }}</div>
+            <div>Tax (5%): ₹{{ tax }}</div>
+            <div style="font-size:20px;">Total: ₹{{ total }}</div>
+        </div>
+
+        <!-- Footer with Payment Terms -->
+        <div class="footer">
+            <p><i>{{ payment_terms }}</i></p>
+            <p><small>Thank you for choosing Coffee Shop!</small></p>
+        </div>
+
+        <!-- Print Button -->
+        <button class="print-btn" onclick="window.print()">Print Receipt</button>
+    </div>
+
+</body>
+</html>

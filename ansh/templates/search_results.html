@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+{% block content %}
+
+<h1>Search Results</h1>
+
+<form class="d-flex" role="search" method="get" action="{% url 'search_results' %}">
+  <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" value="{{ query }}">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+{% if results %}
+  <ul>
+    {% for product in results %}
+      <li>{{ product.name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No results found for "{{ query }}".</p>
+{% endif %}
+
+
+{% endblock %}

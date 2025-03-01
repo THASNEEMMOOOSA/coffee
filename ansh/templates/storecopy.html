@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+{% block title %}
+
+Store
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/4721/4721227.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="container m-5">
+    <!-- <h1 style="text-align: center; margin-bottom: 5%; color: rgba(57, 37, 6, 0.923);font-family: fantasy;"><u>MENU </u></h1> -->
+
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="opacity: 90%;">
+            {% for a in coffee %}
+
+        <div class="col-lg-4 col-md-6  col-12">
+
+            <div class="card w-100  rounded-5 shadow-lg " >
+                <!-- Image Section -->
+                <div class="card-img-container" style="height: 250px; ">
+                    <img src="{{ a.image.url }}" class="card-img-top " alt="{{ a.name }}" >
+                </div>
+                <div class="card-body" >
+                    <h5 id="itemname" class="card-title text-center" >{{ a.name }}</h5><br>
+                    <h6 id="itemquantity" class="card-text text-center">Quantity: {{ a.quantity }} ml</h6>
+                    <h6 id="itemprice" class="card-text text-center">Price: {{ a.price }} Rs</h6><br>
+                    <div class="d-flex justify-content-center gap-2">
+                    <a href="{{ a.id }}/buyform1/" class="btn btn-success " >Buy Now</a>
+                    <a href="{{ a.id }}/buyform/" class="btn btn-warning">Add to Cart</a>
+                </div>
+                </div>
+            </div>
+        </div>           
+
+        {% endfor %}
+        <!-- <a href="/showcart/" class="btn btn-dark" style="margin-left: 33%; margin-top: 5%; font-size: larger; "><b>Show Cart</b></a> -->
+
+    </div>
+</div>
+
+{% endblock %}

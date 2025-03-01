@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+{% block title %}
+
+Add to cart
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/12408/12408211.png" type="image/x-icon">
+{% endblock %}
+
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+<div style="margin-left: 30%; margin-top: 8%">
+<div class="card mb-3" style="max-width: 540px; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{coffee.image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <form action="purchased/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+          <h5 class="card-title" name="name">{{coffee.name}}</h5>
+          <p class="card-text" name="price">Price : {{coffee.price}} Rs</p>
+          <!-- <label for="userid">User ID : &nbsp;</label>
+          <input type="text" name="userid" id="userid"><br> -->
+          <label for="qnt">Quantity : </label>
+          <input type="number" name="qnt" id="qnt"  min="1" required value="1"><br><br>
+          <input type="hidden" name="ima" value="{{coffee.image.url}}">
+          <input type="submit" class="btn btn-success" value="Add To Cart">
+          <!-- <a href="purchased/" class="btn btn-success">Pay now</a> -->
+        </form>
+        </div>
+      </div>
+    </div>
+  </div><br><br><br>
+</div>
+{% endblock %}

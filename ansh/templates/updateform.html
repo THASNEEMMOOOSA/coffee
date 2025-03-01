@@ -1,0 +1,85 @@
+{% extends "master.html" %}
+{% block title %}
+Update Form
+
+{% endblock %}
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+<style>
+    .txu{
+        color: rgb(255, 255, 255);
+        text-shadow: 0 0 3px #110000, 0 0 5px #000000;
+    }
+  </style>
+
+
+
+
+<div class="container  m-5" style=" box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+
+<form method="POST" action="updatesuccess/" enctype="multipart/form-data">
+    <div class=" m-5">
+
+    {% csrf_token %}
+    <div class="row mb-3">
+        <label for="name" class="col-sm-2 col-form-label txu"><b>Item name: </b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" value="{{coffee.name}}">
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <label for="quantity" class="col-sm-2 col-form-label txu"><b>Quantity: </b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="quantity" name="quantity" value="{{coffee.quantity}}">
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <label for="price" class="col-sm-2 col-form-label txu"><b>Price: </b></label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="price" name="price" value="{{coffee.price}}">
+        </div>
+    </div>
+
+    <!-- Current Image Display -->
+    <div class="row mb-3">
+        <label for="currentImage" class="col-sm-2 col-form-label txu"><b>Current Image: </b></label>
+        <div class="col-sm-10">
+            {% if coffee.image %}
+                <img src="{{ coffee.image.url }}" alt="Current Image" style="object-fit: contain; max-width: 50%; height: auto;">
+            {% else %}
+                <p>No image uploaded.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Image Upload Section -->
+    <div class="row mb-3">
+        <label for="img" class="col-sm-2 col-form-label txu"><b>Upload New Image: </b></label>
+        <div class="col-sm-10">
+            <input type="file" id="img" name="img" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-10 offset-sm-2">
+            <input type="submit" onclick="onupdate()" value="Update" class="btn btn-success">
+            <a href="/items/" class="btn btn-warning">Cancel</a>
+        </div>
+    </div>
+
+    <script>
+        function onupdate(){
+            alert("Item details updated successfully.")
+        }
+    </script>
+    </div>
+</form>
+</div>
+
+{% endblock %}

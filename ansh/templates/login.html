@@ -1,0 +1,92 @@
+{% extends "master.html" %}
+{% block title %}
+Login
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/92/92135.png" type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<br><br>
+
+<!-- 
+<div class="container w-50 my-5 mx-auto border rounded p-5 shadow-lg">
+  <div class="d-flex">
+      <div class="flex-shrink-0" style="width: 50%;">
+          <img src="{% static 'img/bgm.jpg'%}" alt="Image" class="img-fluid">
+      </div>
+      
+      <div class="flex-grow-1 ms-4">
+          <form class="row g-3" method="POST" action="/login/">
+              {% csrf_token %}
+              <div class="col-12">
+                  <label for="username" class="form-label">User Name</label>
+                  <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+
+              <div class="col-12">
+                  <label for="psw" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="psw" name="psw" required>
+              </div>
+
+              <div class="col-12">
+                  <input type="submit" class="btn btn-primary" value="Login">
+                  <br><br>
+                  <p>New user--&gt;<a href="/registerform/">Register</a></p>
+              </div>
+          </form>
+
+          {% if message %}
+              <p class="text-danger">Incorrect username or password</p>
+          {% endif %}
+      </div>
+  </div>
+</div> -->
+
+<!-- <div class="container w-50 my-5 mx-auto border rounded p-0 shadow-lg bg-primary"> -->
+    <div class="row w-50 h-75 my-5 mx-auto border rounded  shadow-lg bg-primary">
+
+  <!-- <div class="d-flex row"> -->
+    <!-- <div class="row bg-danger"> -->
+
+      <!-- <div class="flex-shrink-0 " style="width: 55%; height: 100%; overflow: hidden;"> -->
+        <div class="col-lg-6 col-md-6 col-12 bg-success p-0"  >
+
+          <img src="{% static 'img/bgm.jpg'%}" alt="Image" class="d-block w-100 h-100 object-fit-cover">
+      </div>
+      
+      <!-- <div class="flex-grow-1  container col-md-6" style="background-color: azure;"> -->
+        <div class="col-lg-6 col-md-6 col-12 bg-warning" style="background-color: azure;">
+
+        <form class="row g-3" method="POST" action="/login/">
+            {% csrf_token %}
+            <div class="col-12">
+                <label for="username" class="form-label">User Name: </label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="col-12">
+                <label for="psw" class="form-label">Password: </label>
+                <input type="password" class="form-control" id="psw" name="psw" required>
+            </div>
+
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="Login">
+                <br><br>
+                <p>New user--&gt;<a href="/registerform/">Register</a></p>
+            </div>
+        </form>
+
+        {% if message %}
+            <p class="text-danger">Incorrect username or password</p>
+        {% endif %}
+   
+</div>
+</div> 
+<br><br>
+
+
+{% endblock %}

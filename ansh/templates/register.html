@@ -1,0 +1,67 @@
+{% extends "master.html" %}
+{% block title %}
+Register
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/92/92135.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/" class="btn btn-primary me-2">Log In</a>
+
+
+{% endblock %}
+{% block content %}
+<div class="container w-25 my-5 mx-auto border rounded p-5 shadow-lg" style="background-color: azure;">
+<form class="row g-3" method="POST" action="submit/">
+  {% csrf_token %}
+  <!-- <div class="col-12">
+    <label for="fname" class="form-label">First Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" required>
+  </div><div class="col-12">
+    <label for="lname" class="form-label">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" required>
+  </div> -->
+    <div class="col-12">
+        <label for="inputEmail4" class="form-label">User Name</label>
+        <input type="text" class="form-control" id="inputEmail4" name="username" required>
+      </div>
+    <div class="col-12">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" name="email" required>
+    </div>
+    <div class="col-12">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" name="psw" required>
+    </div>
+    
+    <div class="col-12">
+        <label for="inputPassword4" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="inputPassword4" name="psw-repeat" required>
+      </div>
+
+
+      {% if message %}
+
+      <p class="text-danger">Passwords do not match</p>
+
+
+      {% endif %}
+
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+     <input type="submit" class="btn btn-primary" value="Register"><br><br>
+     <p>Already a user--&gt; <a href="/" class="">Login</a></p>
+    </div>
+  </form>
+</div>
+{% endblock %}

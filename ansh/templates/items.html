@@ -1,0 +1,60 @@
+{% extends "master.html" %}
+
+{% block title %}
+Update Items
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/4721/4721227.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+
+
+
+
+<div class="container m-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4" style="opacity: 90%;">
+      {% for a in coffee %}
+      <div class="col-lg-4 col-md-6  col-12">
+          <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+              <!-- Image Section -->
+              <div class="card-img-container" style="flex-grow: 1; overflow: hidden;">
+                  <img src="{{ a.image.url }}" class="card-img-top" alt="{{ a.name }}" style="object-fit: contain; width: 100%; height: 200px;">
+              </div>
+              <div class="card-body" style="background-color: rgba(255, 255, 255, 0.945); flex-grow: 0;">
+                <h5 id="itemname" class="card-title text-center" >{{ a.name }}</h5><br>
+                <h6 id="itemquantity" class="card-text text-center">Quantity: {{ a.quantity }} ml</h6>
+                <h6 id="itemprice" class="card-text text-center">Price: {{ a.price }} Rs</h6><br>
+          <a href="{{a.id}}/updateform/" class="btn btn-warning" style="margin-left: 27%;">Update</a>
+      <a  onclick="onremove()" class="btn btn-danger">Remove</a>
+
+        </div>
+      </div>
+    </div>
+    <script>
+      function onremove() {
+        let userConfirmed = confirm("Are you sure you want to remove this item from the shop ? \n\n Press 'OK' to confirm!");
+        if (userConfirmed) {
+             location.href="{{a.id}}/remove/";
+        }  
+        else{
+           location.href=location.href;
+        }
+      
+      
+      }
+      </script>
+
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}

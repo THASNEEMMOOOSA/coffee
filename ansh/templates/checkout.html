@@ -1,0 +1,159 @@
+{% extends "master.html" %}
+{% block title %}
+Checkout
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/1187/1187491.png" type="image/x-icon">
+{% endblock %}
+
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+
+<div style="margin-top: 20px;" class="card">
+    <h3 class="container" style="color: rgba(69, 43, 3, 0.863); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Order Summary : </h3><br>
+    <div class="container m-10 ">
+
+
+       <table class="table table-striped" style="opacity: 90%;">
+
+       <tr>
+         <th>S.no</th>
+         <th> Item Name </th>
+         <th> ML </th>
+         <th> Price </th>
+         <th> Quantity </th>
+         <th>Total</th>
+       </tr>
+      
+       {% for a in coffee %}
+       
+       <tr>
+         <td >{{ forloop.counter }}</td>
+         <td >{{a.itemname}}</td>
+
+         <td >{{a.itemquantity}}</td>
+         <td>{{a.itemprice}}</td>
+         <td>{{a.itemqnt}}</td>
+         <td>{{a.total}} &nbsp;Rs </td>
+       </tr>
+     
+
+       {% endfor %}
+       <tr>
+         <td style="text-align: end;" colspan="5">Subtotal :  </td>
+         <td >{{checkout.subtotal}} Rs  </td>
+        </tr>
+        <tr>
+          <td style="text-align: end;" colspan="5">Tax (5 %) :  </td>
+          <td >{{checkout.tax}} Rs  </td>
+         </tr>
+         <tr>
+          <td style="text-align: end;" colspan="5">Total Price :  </td>
+          <td >{{checkout.totalprice}} Rs  </td>
+         </tr>
+        
+     </table>
+     <br>
+     <hr>
+     <br>
+     <div class="row g-3">
+      <h3 class="container" style="color: rgba(69, 43, 3, 0.863); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">User Details : </h3><br>
+
+      
+    </div>
+    <form class="row g-3" method="POST" action="purchased/">
+      {% csrf_token %}
+
+      <div class="col">
+        <label for="fname" class="form-label">First Name</label>
+        <input type="text" class="form-control"  aria-label="First name" value="" name="fname" required>
+      </div>
+      <div class="col">
+        <label for="lname" class="form-label">Last Name</label>
+
+        <input type="text" class="form-control"  aria-label="Last name" name="lname" value="">
+      </div>
+      <div class="col-col-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" value="{{user.email}}" name="email">
+      </div>
+      <div class="col-col-6">
+        <label for="phone" class="form-label">Phone No.</label>
+        <input type="text" class="form-control" id="inputEmail4"  name="phone">
+      </div>
+     
+      <div class="col-12">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="inputAddress" name="address" required>
+      </div>
+      
+      <div class="col-md-6">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="inputCity" name="city" required>
+      </div>
+      <div class="col-md-4">
+        <label for="state" class="form-label">State</label>
+        <input type="text" class="form-control" id="inputCity" name="state" required>
+      </div>
+      <div class="col-md-2">
+        <label for="zipcode" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="inputZip" name="zipcode" required>
+      </div>
+      
+      <div class="col-12">
+        <!-- <button class="btn btn-success m-5" >Pay</button> -->
+        <!-- <input type="submit" id="rzp-button1"  class="btn btn-warning" value="Place Order and pay"> -->
+        <input type="submit"  class="btn btn-warning" value="Place Order">
+
+      </div>
+    </form>
+    <br>
+ 
+
+ 
+</div>
+</div>
+<br>
+
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_6LPRQFPLbqHgqV", // Enter the Key ID generated from the Dashboard
+    "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Acme Corp", //your business name
+    "description": "Test Transaction",
+    "image": "https://marketplace.canva.com/EAFLU7Mm3FI/1/0/800w/canva-brown-and-beige-simple-minimalist-coffee-shop-circle-logo-k8UALghOpZU.jpg",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": "Gaurav Kumar", //your customer's name
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script> -->
+
+
+
+
+
+{% endblock %}

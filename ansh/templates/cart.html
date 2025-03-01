@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+{% block title %}
+My cart
+
+{% endblock %}
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="..." class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <form action="showcart/" method="POST">
+            {% csrf_token %}
+          <!-- <h5 class="card-title" name="name">{{coffee.name}}</h5> -->
+          <!-- <p class="card-text" name="price">{{coffee.price}}</p> -->
+            <label for="userid">User Id : </label><br>
+          <input type="text" name="userid" id="userid">
+          <!--  <input type="number" name="qnt" id="qnt"><br><br>  -->
+<input type="submit" value="showcart">
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

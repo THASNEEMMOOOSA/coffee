@@ -1,0 +1,36 @@
+{% extends "master.html" %}
+{% block title %}
+Home
+
+{% endblock %}
+
+{% block favc %}
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/92/92135.png" type="image/x-icon">
+{% endblock %}
+
+{% block lob %}
+<a href="/logout/" class="btn btn-danger me-2">Log Out</a>
+
+
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <h1 style="text-align: center; margin-top: 10px; color: rgba(139, 93, 23, 0.863); margin-bottom: 10%;font-family: fantasy; ">Welcome   {{user}} </h1>
+
+    <p style="text-align: center; margin-bottom: 10%; font-family: 'handwriting', cursive ; font-size: larger;"> "Coffee with a story in every sip." ☕✨<br>
+"Where every cup feels like home."<br>
+"Sip, savor, share – your perfect brew awaits."<br>
+"Good days start with great coffee."<br>
+"Brewing connections, one cup at a time."</p>
+
+<p style="text-align: center; font-family: 'handwriting', cursive ; font-size: larger;"><i>
+    "Discover your favorites and bring the experience home – explore our selection now!"</i></p>
+
+    <a href="/store/" class="btn btn-dark" style="margin-left: 47%;">Shop Now</a>
+    <!-- <a href="/logout/" class="btn btn-dark" style="margin-left: 44%;">Log Out</a> -->
+</div><br><br>
+
+
+{% endblock %}
